@@ -13,9 +13,10 @@ urlpatterns = [
     path('list/<int:list_id>/', views.user_to_dolist, name='list'),
     path('list/<int:list_id>/add_task/', views.add_task, name='add_task'),
 
-    path('list/<int:list_id>/complete/<int:task_id>/', views.complete_task, name='complete_task'),
+    path('list/complete/<int:task_id>/', views.complete_task, name='complete_task'),
 
-    path('list/delete/<int:task_id>/', views.delete_task, name='delete_task'),
+    path('list/deletetask/<int:task_id>/', views.delete_task, name='delete_task'),
+    path('list/deletelist/<int:list_id>/', views.delete_list, name='delete_list'),
 
     path('change_password/', views.change_password, name='change_password'),
 

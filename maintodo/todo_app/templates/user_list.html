@@ -34,7 +34,10 @@ table, th, td {
                 <td>{{ task.title }}</td>
                 <td>{{ task.description }}</td>
                 <td>
+                    <a href="{% url 'complete_task' task.id %}">completed</a>
+                    {% if task.complete %}
                     <a href="{% url 'delete_task' task.id %}">Delete</a>
+                    {% endif %}
                 </td>
             </tr>
         {% endfor %}

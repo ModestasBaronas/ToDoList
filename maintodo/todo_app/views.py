@@ -98,6 +98,12 @@ def delete_task(request, task_id):
     return redirect('list', task.todo_list.id)
 
 
+def delete_list(request, list_id):
+    users_lists = ToDoList.objects.get(id=list_id)
+    users_lists.delete()
+    return redirect('lists')
+
+
 @login_required
 def profile_view(request):
     lists = ToDoList.objects.filter(user=request.user)

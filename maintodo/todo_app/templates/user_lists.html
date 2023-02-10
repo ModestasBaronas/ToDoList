@@ -21,6 +21,7 @@
         {% for todo_list in todo_lists %}
             <hr>
             <li><a href="{% url 'list' todo_list.id %}">{{ todo_list.title }}</a></li>
+            <a href="{% url 'delete_list' todo_list.id %}">Delete</a>
 
         {% endfor %}
         </ul>
