@@ -25,8 +25,10 @@
                 <td>{{ task.description }}</td>
                 <td>{{ task.created|date:"Y/m/d H:i" }}</td>
                 <td>
+                    <a href="{% url 'edit_task' task.id %}"><button class="button5"><i class="gg-pen"></i></button></a>
                   {% if not task.complete %}
                     <a href="{% url 'complete_task' task.id %}"><button class="button5"><i class="gg-check-r"></i></button></a>
+
                   {% else %}
                     <a href="{% url 'delete_task' task.id %}" onclick="return confirm('Are you sure you want to delete this item?');"><button class="button5"><i class="gg-trash"></i></button></a>
                   {% endif %}

@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from .models import ToDoTask
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -16,3 +17,7 @@ class CustomUserCreationForm(UserCreationForm):
         self.fields['username'].initial = ''
         self.fields['email'].initial = ''
 
+class ToDoTaskForm(forms.ModelForm):
+    class Meta:
+        model = ToDoTask
+        fields = ['title', 'description', 'complete']

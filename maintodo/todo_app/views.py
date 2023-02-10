@@ -3,7 +3,7 @@ from django.contrib.auth.views import LoginView, PasswordChangeView
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.contrib.auth import login, authenticate, update_session_auth_hash
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm, ToDoTaskForm
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import PasswordChangeForm, UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -107,6 +107,18 @@ def delete_list(request, list_id):
     users_lists = ToDoList.objects.get(id=list_id)
     users_lists.delete()
     return redirect('lists')
+
+@login_required
+def edit_task(request, task_id):
+    task = ToDoTask.objects.get(id=task_id)
+    if request.method == 'POST':
+        form = ToDoTaskForm(request.POST, instance=task)
+        if form.is_valid():
+            form.save()
+            return redirect('list', list_id=task.todo_list.id)
+    else:
+        form = ToDoTaskForm(instance=task)
+    return render(request, 'edit_task.html', {'form': form})
 
 
 @login_required

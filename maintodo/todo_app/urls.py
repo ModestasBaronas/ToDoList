@@ -10,6 +10,8 @@ urlpatterns = [
     path('profile/', views.profile_view, name='profile'),
     path('logout/', LogoutView.as_view(), name='logout'),
 
+    path('list/edit/<int:task_id>/', views.edit_task, name='edit_task'),
+
     path('list/<int:list_id>/', views.list, name='list'),
     path('lists/', views.user_to_dolist, name='lists'),
     path('add_list/', views.add_list, name='add_list'),
