@@ -5,17 +5,22 @@ from django.urls import reverse
 from django.contrib.auth import login, authenticate, update_session_auth_hash
 from .forms import CustomUserCreationForm
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.forms import PasswordChangeForm, UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User
-
 from .models import ToDoList, ToDoTask
 # Create your views here.
 
 
 def index(request):
-    return render(request, 'index.html')
+    num_visits = request.session.get('num_visits', 1)
+    request.session['num_visits'] = num_visits + 1
+
+    kontext = {
+        "num_visits": num_visits,
+    }
+    return render(request, 'index.html', context=kontext)
 
 
 @login_required
@@ -35,7 +40,7 @@ def change_password(request):
 
 def register(request):
     if request.method == 'POST':
-        form = CustomUserCreationForm(request.POST)
+        form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
@@ -44,7 +49,7 @@ def register(request):
             login(request, user)
             return redirect('home')
     else:
-        form = CustomUserCreationForm()
+        form = UserCreationForm()
     return render(request, 'registration/register.html', {'form': form})
 
 

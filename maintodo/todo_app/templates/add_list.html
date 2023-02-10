@@ -1,26 +1,12 @@
 {% extends "base.html" %}
-
+{% block title %}ADD LIST{% endblock %}
 {% block content %}
-<style>
-  .box {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 400px;
-    height: 500px;
-    padding: 40px;
-    transform: translate(-50%,-50%);
-    background: rgba(0,0,0,.3);
-    box-sizing: border-box;
-    box-shadow: 0 15px 25px rgba(0,0,0,.6);
-    border-radius: 10px;
-}
-</style>
+
     <div class="box">
-        <h2>Add ToDo List</h2>
+        <h2>Add To Do List Tittle</h2>
         <form method="post">
             {% csrf_token %}
-            <input type="text" name="title">
+            <input type="text" name="title" placeholder="Enter list title">
             <input type="submit" value="Add">
         </form>
     </div>

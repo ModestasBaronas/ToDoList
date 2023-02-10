@@ -1,27 +1,53 @@
 {% extends "base.html" %}
-
+{% block title %}ADD TASK{% endblock %}
 {% block content %}
 <style>
   .box {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 400px;
-    height: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 500px;
+    margin: 0 auto;
     padding: 40px;
-    transform: translate(-50%,-50%);
-    background: rgba(0,0,0,.3);
-    box-sizing: border-box;
-    box-shadow: 0 15px 25px rgba(0,0,0,.6);
-    border-radius: 10px;
-}
+  }
+
+  form input[type="text"],
+  form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 18px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+  }
+
+  form input[type="text"]::placeholder,
+  form textarea::placeholder {
+    color: #bbb;
+  }
+
+
+  form button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #0070f3;
+    color: #fff;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+  }
 </style>
+
+
 <div class="box">
-<form method="post">
-  {% csrf_token %}
-  <input type="text" name="title" placeholder="Task title">
-  <textarea name="description" placeholder="Task description"></textarea>
-  <button type="submit">Add Task</button>
-</form>
-  </div>
+   <form method="post">
+      {% csrf_token %}
+      <input type="text" name="title" placeholder="Task title">
+      <textarea name="description" placeholder="Task description" rows="5" style="resize: none;"></textarea>
+      <button type="submit">Add Task</button>
+  </form>
+</div>
 {% endblock %}

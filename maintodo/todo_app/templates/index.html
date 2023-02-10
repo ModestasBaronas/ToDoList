@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% block title %}HOME{% endblock %}
 {% block content %}
 <style>
   .box {
@@ -51,8 +51,12 @@
 </style>
 
 <div class="box">
+    {% if user.is_authenticated %}
+    <p>Visited {{ num_visits }} times.</p>
+     {% else %}
   <button class="button" onclick="location.href='{% url 'login' %}';"><h5>Login</h5></button>
   <button class="button button1" onclick="location.href='{% url 'register' %}';"><h5>Register</h5></button>
+    {% endif %}
 </div>
 
     </div>
