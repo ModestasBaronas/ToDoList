@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+  .box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    height: 500px;
+    padding: 40px;
+    transform: translate(-50%,-50%);
+    background: rgba(0,0,0,.3);
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0,0,0,.6);
+    border-radius: 10px;
+}
+table, th, td {
+  border:1px solid black;
+}
+</style>
+    <div class="box">
+        <h2>ToDo List: {{ todo_list.title }}</h2>
+        <table>
+            <tr>
+                <th>cmp</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Action</th>
+            </tr>
+        {% for task in todo_list.tasks.all %}
+            <tr>
+                <td>{% if task.complete %}&#10003;{% endif %}</td>
+                <td>{{ task.title }}</td>
+                <td>{{ task.description }}</td>
+                <td>
+                    <a href="{% url 'delete_task' task.id %}">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </table>
+
+        <a href="{% url 'add_task' list_id=todo_list.id %}">Add Task</a>
+    </div>
+{% endblock %}
